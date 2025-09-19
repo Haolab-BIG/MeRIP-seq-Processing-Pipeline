@@ -4,7 +4,8 @@ The MeRIP-seq analysis pipeline processes raw FASTQ data through a series of ste
 # Part I Introduction
 ## i. Workflow
 Here stands an throughout workflow of MeRIP-seq data analysis.
-<img width="1545" height="322" alt="{10970721-EF2C-4D42-B3FE-07E3B15552EE}" src="https://github.com/user-attachments/assets/1f1a6a73-48df-44d6-9935-3a67be1ab189" />
+<img width="1981" height="431" alt="{28D778E7-90D9-4361-9690-8601546549F3}" src="https://github.com/user-attachments/assets/e5c788a7-0bf3-4546-9f3e-41dfb14ccc24" />
+
 
 
 ## ii. Features
@@ -93,10 +94,10 @@ This pipeline provides a fully containerized Singularity environment that bundle
       mkdir basement_data
       cd basement_data
       # Download Genome FASTA and GTF
-      wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh38.primary_assembly.genome.fa.gz
+      wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh38.p14.genome.fa.gz
 	  wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.annotation.gtf.gz
       # Unzip the files
-      gunzip GRCh38.primary_assembly.genome.fa.gz
+      gunzip GRCh38.p14.genome.fa.gz
       gunzip gencode.v46.annotation.gtf.gz
       # Remove scafford
       awk '/^>/ {p=0} /^>chr[0-9XYM]/ {p=1} p' GRCh38.primary_assembly.genome.fa > GRCh38.primary_assembly.genome.chr.fa
@@ -181,8 +182,10 @@ This pipeline provides a fully containerized Singularity environment that bundle
             └── multiqc_report.html
       └── peak/
             ├── exomePeak2_output/
+            ├── motif_analysis/
             ├── exomePeak2_result.rds
             └── run_exomePeak2.R
+          
       ```
    * **Output Interpretation**
 
@@ -256,4 +259,35 @@ This pipeline provides a fully containerized Singularity environment that bundle
         - **STAR**: Alignment statistics such as total reads, uniquely mapped reads, and multi-mapping rates:
 	  
           <img width="2044" height="368" alt="{AF510E4F-CF64-4118-AC3A-6C49E456D585}" src="https://github.com/user-attachments/assets/2d305060-2870-41e8-b04f-3db66b3517bd" />
+
+
+        - **`exomePeak2_output/peaks.csv`**
+		- **peaks.bed**: 12-column BED format
+        - **peaks.csv**:
+        - **Columns**:
+        | Column | Description |
+        |--------|-------------|
+        | chr    | Chromosome name |
+        | chromStart  | Start position of the broad peak (0-based) |
+        | chromEnd    | End position of the broad peak (not inclusive) |
+        | name   | Unique identifier for each peak |
+        | strand  | Strand orientation of the peak |
+        | blockCount | Number of exonic blocks comprising the peak |
+        | blockSizes | Comma-separated sizes of each exonic block |
+        | blockStarts | Comma-separated relative start positions of each block |
+        | RPM.IP | Normalized read coverage in the Immunoprecipitation (IP) sample |
+        | RPM.input | Normalized read coverage in the Input control sample |
+        | geneID | Gene ID associated with the peak |
+        | log2FC | Logarithm base 2 of the fold change between IP and Input |
+		| pvalue | Statistical significance of peak enrichment |
+		| fdr | Adjusted p-value controlling for multiple testing |
+		| score | Composite score representing peak quality and significance |
+
+          <img width="1016" height="423" alt="{C6D8B9EB-BEDF-4F72-9C72-3DAE97C72D0F}" src="https://github.com/user-attachments/assets/5e790d8b-41e5-4198-8af4-8a70b8b31f38" />
+        - **gc_fit.pdf**: This file visualizes the GC-content bias correction model fitted by exomePeak2 to normalize sequencing coverage variations caused by GC composition differences.
+	      <img width="590" height="364" alt="{5AD64503-2C51-4B3B-83A3-F879DE3D91D2}" src="https://github.com/user-attachments/assets/c7dcc331-d38e-409c-905c-1b8e96cd2030" />
+
+	    - **`motif_analysis/streme.html`**
+          <img width="1585" height="526" alt="{52337D6C-9973-4DE8-A663-1A76A6888940}" src="https://github.com/user-attachments/assets/baaf50ea-5b72-4c30-95bc-ea22f1ad4703" />
+
 
