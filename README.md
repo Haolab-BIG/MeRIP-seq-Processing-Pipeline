@@ -126,7 +126,7 @@ This pipeline provides a fully containerized Singularity environment that bundle
    * **Example code**
 
       ```bash
-      bash ./newmerge_Merip_fixed.sh --IpFq ./MERIP-ip_test.fastq.gz \
+      bash ./final_all_merip.sh --IpFq ./MERIP-ip_test.fastq.gz \
                                      --InputFq ./MERIP-input_test.fastq.gz \
                                      --outputdir /mnt/guanli/lyc.MeRIP.singularity/newresult \
                                      --referencedir ./hg38_chr_star_index \
