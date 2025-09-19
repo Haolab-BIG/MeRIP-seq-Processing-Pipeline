@@ -4,7 +4,7 @@ The MeRIP-seq analysis pipeline processes raw FASTQ data through a series of ste
 # Part I Introduction
 ## i. Workflow
 Here stands an throughout workflow of MeRIP-seq data analysis.
-<img width="1981" height="431" alt="{28D778E7-90D9-4361-9690-8601546549F3}" src="https://github.com/user-attachments/assets/e5c788a7-0bf3-4546-9f3e-41dfb14ccc24" />
+<img width="1561" height="328" alt="{60F67D9B-A185-4AD0-A189-2B85B24551FC}" src="https://github.com/user-attachments/assets/9ec8a35c-4dd1-43d5-92fb-2997df464168" />
 
 
 
